@@ -1,0 +1,290 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+        180deg,
+        #101b24 0%,
+        #243a39 55%,
+        #526448 100%
+    );
+    font-family: Georgia, serif;
+}
+
+.background-glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+        circle,
+        rgba(255, 207, 77, 0.13),
+        transparent 70%
+    );
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.garden {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.title {
+    position: absolute;
+    top: 12%;
+    z-index: 10;
+    text-align: center;
+    animation: appear 2s ease forwards;
+}
+
+.title span {
+    font-size: clamp(48px, 8vw, 85px);
+    color: #ffe9a3;
+    font-weight: normal;
+    letter-spacing: 5px;
+    text-shadow:
+        0 0 15px rgba(255, 214, 100, 0.7),
+        0 0 40px rgba(255, 193, 50, 0.35);
+}
+
+.title-line {
+    width: 65%;
+    height: 1px;
+    margin: 15px auto;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #ffe4a0,
+        transparent
+    );
+}
+
+.flowers-container {
+    position: absolute;
+    bottom: 12%;
+    width: min(900px, 100%);
+    height: 65%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(5px, 2vw, 25px);
+}
+
+.flower {
+    position: relative;
+    width: 85px;
+    height: var(--height);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    transform-origin: bottom center;
+    animation: sway var(--speed) ease-in-out infinite alternate;
+    animation-delay: var(--delay);
+    cursor: pointer;
+}
+
+.flower-head {
+    position: absolute;
+    top: 0;
+    width: 90px;
+    height: 90px;
+    z-index: 3;
+    transform: scale(var(--scale));
+    filter: drop-shadow(0 0 12px rgba(255, 205, 60, 0.3));
+}
+
+.petal {
+    position: absolute;
+    width: 24px;
+    height: 42px;
+    background: linear-gradient(
+        180deg,
+        #fff4a6,
+        #ffcf36 55%,
+        #efa900
+    );
+    border-radius: 50% 50% 42% 42%;
+    left: 33px;
+    top: 3px;
+    transform-origin: 12px 42px;
+    box-shadow: inset 0 0 5px rgba(255,255,255,0.5);
+}
+
+.flower-center {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(
+        circle at 35% 30%,
+        #9d5b12,
+        #57300a
+    );
+    border-radius: 50%;
+    top: 32px;
+    left: 32px;
+    z-index: 4;
+    box-shadow: 0 0 8px #ffdc64;
+}
+
+.stem {
+    position: absolute;
+    bottom: 0;
+    width: 5px;
+    height: calc(100% - 65px);
+    background: linear-gradient(
+        90deg,
+        #315d32,
+        #79a64d,
+        #315d32
+    );
+    border-radius: 10px;
+    transform: rotate(var(--lean));
+    transform-origin: bottom center;
+}
+
+.leaf {
+    position: absolute;
+    width: 36px;
+    height: 17px;
+    background: linear-gradient(135deg, #a4c96b, #315c31);
+    border-radius: 100% 0 100% 0;
+    z-index: 2;
+}
+
+.leaf.left {
+    left: -28px;
+    top: 55%;
+    transform: rotate(15deg);
+}
+
+.leaf.right {
+    right: -28px;
+    top: 70%;
+    transform: scaleX(-1) rotate(15deg);
+}
+
+.ground {
+    position: absolute;
+    bottom: -80px;
+    width: 130%;
+    height: 150px;
+    background: radial-gradient(
+        ellipse,
+        rgba(20, 35, 20, 0.8),
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #ffe8a0;
+    box-shadow: 0 0 10px #ffdc75;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+.sparkle {
+    position: fixed;
+    width: 7px;
+    height: 7px;
+    background: #fff0a6;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 15px #ffd34d;
+    animation: sparkle 800ms ease-out forwards;
+}
+
+@keyframes sway {
+    from {
+        transform: rotate(-5deg);
+    }
+    to {
+        transform: rotate(5deg);
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.7);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes sparkle {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-35px) scale(3);
+    }
+}
+
+@media (max-width: 600px) {
+    .flowers-container {
+        transform: scale(0.78);
+        width: 130%;
+        bottom: 12%;
+    }
+
+    .title {
+        top: 17%;
+    }
+
+    .title span {
+        letter-spacing: 3px;
+    }
+}
+
+@media (max-height: 550px) {
+    .title {
+        top: 5%;
+    }
+
+    .flowers-container {
+        bottom: 3%;
+        transform: scale(0.75);
+    }
+}
